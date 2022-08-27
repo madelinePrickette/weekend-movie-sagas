@@ -4,10 +4,11 @@ import {useDispatch} from 'react-redux'
 function Details() {
 
     const dispatch = useDispatch();
-    
+
 
     const movie = useSelector(store => store.thisMovie)
     // another useselect to get the genres
+    const genres = useSelector(store => store.thisMoviesGenres)
 
     return(
         <>
@@ -16,6 +17,13 @@ function Details() {
             <img src={movie.poster}></img>
             <p>{movie.description}</p>
             {/* need to get the categories here */}
+            <ul>
+                {genres.map(genre => {
+                    return (
+                        <li>{genre.name}</li>
+                    )
+                })}
+            </ul>
         </>
     )
 }
