@@ -7,9 +7,11 @@ function MovieList() {
 
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
+    const genres = useSelector(store => store.genres)
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
+        // dispatch({ type: 'FETCH_GENRES' }); dunno why this is needed yet...
     }, []);
 
     return (
@@ -22,6 +24,7 @@ function MovieList() {
                     );
                 })}
             </section>
+            {/* {JSON.stringify(genres)} */}
         </main>
 
     );

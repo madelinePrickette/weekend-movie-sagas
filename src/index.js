@@ -14,6 +14,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_GENRES', fetchAllGenres);
 }
 
 function* fetchAllMovies() {
@@ -29,7 +30,16 @@ function* fetchAllMovies() {
     }    
 } // end of fetchAllMovies generator
 
-// genre generator goes here--------
+// genre generator goes here-------- Dunno why this is needed so I'm gonna hide it
+function* fetchAllGenres() {
+    try {
+        const genres = yield axios.get('/api/genre');
+        console.log('this is all genres:', genres.data);
+        yield put({ type: 'SET_GENRES', payload: genres.data})
+    } catch {
+        console.log('error in the fetchAllGenres generator function')
+    }
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
