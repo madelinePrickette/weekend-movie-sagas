@@ -4,7 +4,7 @@ const pool = require('../modules/pool')
 
 router.get('/:id', (req, res) => {
 
-    const id = req.params
+    console.log('This is the movie id recieved from the client:', req.params.id);
 
     const queryText = 
     `
@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
     ON "movies_genres".movie_id = "movies".id
     WHERE "movies".id = $1;
     `;
-    const queryValues = [id]
+    const queryValues = [req.params.id]
 
     pool.query(queryText, queryValues)
         .then( result => {
