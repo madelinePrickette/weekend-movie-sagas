@@ -1,0 +1,28 @@
+import {useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+
+function MovieItem({movie}) {
+
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const handleMovieClick = () => {
+        history.push(`/details/${movie.id}`)
+
+        dispatch({
+            type: 'THIS_MOVIE',
+            payload: movie
+        })
+    }
+
+    return(
+        <>
+            <h3>{movie.title}</h3>
+            <img src={movie.poster} alt={movie.title} onClick={handleMovieClick}/>
+        </>
+    )
+}
+// onclick in here sends dispatch- send whole movie through to redux, 
+// push to details component, details component uses 
+// useSelector to grab that movie from redux
+export default MovieItem;
