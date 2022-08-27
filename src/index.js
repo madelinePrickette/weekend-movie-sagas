@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_GENRES', fetchAllGenres);
+    yield takeEvery('FETCH_THIS_MOVIES_GENRES', fetchMovieGenres)
 }
 
 function* fetchAllMovies() {
@@ -38,6 +39,24 @@ function* fetchAllGenres() {
         yield put({ type: 'SET_GENRES', payload: genres.data})
     } catch {
         console.log('error in the fetchAllGenres generator function')
+    }
+}
+
+function* fetchMovieGenres(action) {
+    console.log('the action.payload:', action.payload);
+    console.log('the action.payload.id:', action.payload.id);
+
+    try{
+        // this axios request fires off the get in movie.genre.router to get
+        // the genres of the movie at the id we sent over in action.payload.movieId
+        // which comes from the dispatch in the component that holds the movie id
+        // in the action.
+        // the response should be stored in the this movie reducer which
+        // holds all info about a specific movie
+        let genres = yield axios.get(`/api/movieGenre/${action.payload.id}`);
+        yield put({type: 'THIS_MOVIES_GENRES', payload: genres.data})
+    }catch {
+        console.log('get the genres of the movie error GENERATOR FUNCTION')
     }
 }
 
@@ -65,6 +84,16 @@ const thisMovie = (state = {}, action) => {
     }
 }
 
+// this reducer holds the genres of the selected movie in an array
+const thisMoviesGenres = (state = [], action) => {
+    switch (action.type) {
+        case 'THIS_MOVIES_GENRES':
+            return action.payload
+        default: 
+            return state;
+    }
+}
+
 // Used to store the movie genres 
 // UPON STARTING THERE IS NO GENRE GENERATOR FUNCTION
 const genres = (state = [], action) => {
@@ -81,7 +110,8 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        thisMovie
+        thisMovie,
+        thisMoviesGenres
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
