@@ -16,6 +16,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_GENRES', fetchAllGenres);
     yield takeEvery('FETCH_THIS_MOVIES_GENRES', fetchMovieGenres)
+    yield takeEvery('CREATE_NEW_MOVIE', createNewMovie)
 }
 
 function* fetchAllMovies() {
@@ -57,6 +58,17 @@ function* fetchMovieGenres(action) {
         yield put({type: 'THIS_MOVIES_GENRES', payload: genres.data})
     }catch {
         console.log('get the genres of the movie error GENERATOR FUNCTION')
+    }
+}
+
+//create generator function for creating a new movie
+function* createNewMovie(action) {
+    console.log('the new create movie action.payload is:', action.payload)
+    try{
+        yield axios.post(`/api/movie`, action.payload)
+        yield put({type: 'FETCH_MOVIES'})
+    } catch(err) {
+        console.log('Error in createNewMovie generator function', err);
     }
 }
 
