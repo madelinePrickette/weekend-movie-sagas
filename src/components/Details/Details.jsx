@@ -1,5 +1,6 @@
 import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
+import './Details.css'
 
 function Details() {
 
@@ -14,7 +15,7 @@ function Details() {
         <>
             <h4>Details Page</h4>
             <h3>{movie.title}</h3>
-            <img src={movie.poster}></img>
+            <img src={movie.poster} className="imageResize"></img>
             <p>{movie.description}</p>
             {/* need to get the categories here */}
             <ul>

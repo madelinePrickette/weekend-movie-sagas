@@ -1,5 +1,6 @@
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
+import './MovieItem.css'
 
 function MovieItem({movie}) {
 
@@ -23,7 +24,7 @@ function MovieItem({movie}) {
     return(
         <>
             <h3>{movie.title}</h3>
-            <img src={movie.poster} alt={movie.title} onClick={handleMovieClick}/>
+            <img src={movie.poster} alt={movie.title} onClick={handleMovieClick} className="imageResize"/>
         </>
     )
 }
