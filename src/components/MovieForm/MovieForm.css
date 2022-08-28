@@ -1,0 +1,10 @@
+.block-layout {
+    display: block;
+    text-align: left;
+}
+
+.center-div{
+    max-width: 700px;
+    margin-left: 33%;
+    margin-right: 33%;
+}

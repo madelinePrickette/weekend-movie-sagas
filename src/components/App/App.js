@@ -11,7 +11,7 @@ function App() {
         <header className='App-header'>
           <h1>The Movies Saga!</h1>
           <nav>
-            <ul>
+            <ul className='no-bullets'>
               <li>
                 <Link to='/'>Movie List</Link>
               </li>

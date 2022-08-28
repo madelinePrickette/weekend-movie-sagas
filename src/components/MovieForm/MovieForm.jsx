@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import './MovieForm.css'
 
 function MovieForm() {
 
@@ -39,40 +40,45 @@ function MovieForm() {
     console.log('Chosen genre:', newMovie);
     return(
         <>
-            <h3>Add a movie</h3>
+            <div className='center-div'>
+                <h3>Add a movie</h3>
 
-            {/* inputs */}
-            <input placeholder='Movie Title' type="text" onChange={handleTitleChange}></input>
-            <input placeholder='Image URL' type="text" onChange={handleImageChange}></input>
+                {/* inputs */}
+                <input placeholder='Movie Title' type="text" onChange={handleTitleChange} className="block-layout"></input>
+                <input placeholder='Image URL' type="text" onChange={handleImageChange} className="block-layout"></input>
 
-            {/* text area for description */}
-            <textarea placeholder='Movie description' type="text" onChange={handleDescriptionChange}></textarea>
+                {/* text area for description */}
+                <textarea placeholder='Movie description' type="text" onChange={handleDescriptionChange} className="block-layout"></textarea>
 
-            {/* Dropdown stuff */}
-            <label htmlFor="chosenGenre">Genres:</label>
-            <select
-            onChange={handleChange}
-            name="chosenGenre"
-            id="chosenGenre"
-            >
-                <option>Choose genre...</option>
-                <option value="1">Adventure</option>
-                <option value="2">Animated</option>
-                <option value="3">Biographical</option>
-                <option value="4">Comedy</option>
-                <option value="5">Disaster</option>
-                <option value="6">Drama</option>
-                <option value="7">Epic</option>
-                <option value="8">Fantasy</option>
-                <option value="9">Musical</option>
-                <option value="10">Romantic</option>
-                <option value="11">Science Fiction</option>
-                <option value="12">Space-Opera</option>
-                <option value="13">Superhero</option>
-            </select>
+                {/* Dropdown stuff */}
+                <div className='block-layout'>
+                    <label htmlFor="chosenGenre">Genres:</label>
+                    <select
+                    onChange={handleChange}
+                    name="chosenGenre"
+                    id="chosenGenre"
+                    className="block-layout"
+                    >
+                        <option>Choose genre...</option>
+                        <option value="1">Adventure</option>
+                        <option value="2">Animated</option>
+                        <option value="3">Biographical</option>
+                        <option value="4">Comedy</option>
+                        <option value="5">Disaster</option>
+                        <option value="6">Drama</option>
+                        <option value="7">Epic</option>
+                        <option value="8">Fantasy</option>
+                        <option value="9">Musical</option>
+                        <option value="10">Romantic</option>
+                        <option value="11">Science Fiction</option>
+                        <option value="12">Space-Opera</option>
+                        <option value="13">Superhero</option>
+                    </select>
+                </div>
 
-            {/* submit button */}
-            <button onClick={handleClick}>Submit</button>
+                {/* submit button */}
+                <button onClick={handleClick} className='block-layout'>Submit</button>
+            </div>
         </>
     )
 }
